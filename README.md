@@ -34,12 +34,20 @@ The compression function:
 2. Zeroes out the **16 least significant bits**.
 3. Converts it back to a floating-point number.
 
+```python
+int_rep = struct.unpack('>I', struct.pack('>f', num))
+        
+int_rep &= ~((1 << bits_to_zero) - 1)
+
+compressed_data[i] = struct.unpack('>f', struct.pack('>I', int_rep))
+```
+
 ### File Storage
 Original and compressed data are saved as binary files:
 
 
 ### File Size Reduction
-The script measures file sizes before and after compression:
+The script measures file sizes before and after compression
 
 
 ### Statistical Comparison
